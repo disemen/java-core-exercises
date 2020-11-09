@@ -2,6 +2,7 @@ package com.bobocode;
 
 import java.math.BigDecimal;
 import java.util.Map;
+import java.util.Random;
 import java.util.function.*;
 
 public class CrazyLambdas {
@@ -12,7 +13,8 @@ public class CrazyLambdas {
      * @return a string supplier
      */
     public static Supplier<String> helloSupplier() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        // todo: done
+        return () -> "Hello";
     }
 
     /**
@@ -21,7 +23,8 @@ public class CrazyLambdas {
      * @return a string predicate
      */
     public static Predicate<String> isEmptyPredicate() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        // todo: done
+        return String::isEmpty;
     }
 
     /**
@@ -31,7 +34,8 @@ public class CrazyLambdas {
      * @return function that repeats Strings
      */
     public static BiFunction<String, Integer, String> stringMultiplier() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        // todo: done
+        return String::repeat;
     }
 
     /**
@@ -41,7 +45,8 @@ public class CrazyLambdas {
      * @return function that converts adds dollar sign
      */
     public static Function<BigDecimal, String> toDollarStringFunction() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        // todo: done
+        return bigDecimal -> "$" + bigDecimal.toString();
     }
 
     /**
@@ -53,7 +58,8 @@ public class CrazyLambdas {
      * @return a string predicate
      */
     public static Predicate<String> lengthInRangePredicate(int min, int max) {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        // todo: done
+        return s -> s.length() >= min && s.length() < max;
     }
 
     /**
@@ -62,7 +68,8 @@ public class CrazyLambdas {
      * @return int supplier
      */
     public static IntSupplier randomIntSupplier() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        // todo: done
+        return () -> new Random().nextInt();
     }
 
 
@@ -72,7 +79,8 @@ public class CrazyLambdas {
      * @return int operation
      */
     public static IntUnaryOperator boundedRandomIntSupplier() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        // todo: done
+        return operand -> new Random(operand).nextInt();
     }
 
     /**
@@ -81,7 +89,8 @@ public class CrazyLambdas {
      * @return square operation
      */
     public static IntUnaryOperator intSquareOperation() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        // todo: done
+        return operand -> operand * operand;
     }
 
     /**
@@ -90,7 +99,8 @@ public class CrazyLambdas {
      * @return binary sum operation
      */
     public static LongBinaryOperator longSumOperation() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        // todo: done
+        return Long::sum;
     }
 
     /**
@@ -99,7 +109,8 @@ public class CrazyLambdas {
      * @return string to int converter
      */
     public static ToIntFunction<String> stringToIntConverter() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        // todo: done
+        return Integer::parseInt;
     }
 
     /**
@@ -110,7 +121,8 @@ public class CrazyLambdas {
      * @return a function supplier
      */
     public static Supplier<IntUnaryOperator> nMultiplyFunctionSupplier(int n) {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        // todo: done
+        return () -> operand -> operand * n;
     }
 
     /**
@@ -119,7 +131,8 @@ public class CrazyLambdas {
      * @return function that composes functions with trim() function
      */
     public static UnaryOperator<Function<String, String>> composeWithTrimFunction() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        // todo: done
+        return function -> function.compose(String::trim);
     }
 
     /**
@@ -130,7 +143,12 @@ public class CrazyLambdas {
      * @return a thread supplier
      */
     public static Supplier<Thread> runningThreadSupplier(Runnable runnable) {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        // todo: done
+        return () -> {
+            Thread thread = new Thread(runnable);
+            thread.start();
+            return thread;
+        };
     }
 
     /**
@@ -139,7 +157,8 @@ public class CrazyLambdas {
      * @return a runnable consumer
      */
     public static Consumer<Runnable> newThreadRunnableConsumer() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        // todo: done
+        return Runnable::run;
     }
 
     /**
@@ -149,7 +168,12 @@ public class CrazyLambdas {
      * @return a function that transforms runnable into a thread supplier
      */
     public static Function<Runnable, Supplier<Thread>> runnableToThreadSupplierFunction() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        // todo: done
+        return function -> () -> {
+            Thread thread = new Thread(function);
+            thread.start();
+            return thread;
+        };
     }
 
     /**
@@ -162,7 +186,9 @@ public class CrazyLambdas {
      * @return a binary function that receiver predicate and function and compose them to create a new function
      */
     public static BiFunction<IntUnaryOperator, IntPredicate, IntUnaryOperator> functionToConditionalFunction() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        // todo: done
+        return (intUnaryOperator, intPredicate) ->
+                intUnaryOperator.compose(i -> intPredicate.test(i) ? i : intUnaryOperator.applyAsInt(i));
     }
 
     /**
@@ -173,7 +199,8 @@ public class CrazyLambdas {
      * @return a high-order function that fetches a function from a function map by a given name or returns identity()
      */
     public static BiFunction<Map<String, IntUnaryOperator>, String, IntUnaryOperator> functionLoader() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        // todo: done
+        return (map, s) -> map.getOrDefault(s, IntUnaryOperator.identity());
     }
 
     /**
@@ -182,7 +209,8 @@ public class CrazyLambdas {
      * @return a supplier instance
      */
     public static Supplier<Supplier<Supplier<String>>> trickyWellDoneSupplier() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        // todo: done
+        return () -> () -> () -> "WELL DONE!";
     }
 }
 
