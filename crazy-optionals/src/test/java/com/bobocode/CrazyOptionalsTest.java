@@ -1,4 +1,4 @@
-package com;
+package com.bobocode;
 
 
 import com.bobocode.CrazyOptionals;
